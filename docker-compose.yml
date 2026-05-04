@@ -50,7 +50,7 @@ services:
       - GRPC_ADDR=consumer:50051
       - PROMETHEUS_PORT=9092
       - DB_CONN=postgres://user:password@db:5432/tasks?sslmode=disable
-      - MAX_BACKLOG=100
+      - MAX_BACKLOG=10000
       - LOG_LEVEL=debug
       - LOG_FORMAT=json
       - PROFILING_PORT=6062

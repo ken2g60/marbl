@@ -11,6 +11,7 @@ import (
 	_ "net/http/pprof"
 	"os"
 	"os/signal"
+	"strings"
 	"sync"
 	"syscall"
 	"time"
@@ -75,6 +76,11 @@ func main() {
 		for {
 			conn, err := listener.Accept()
 			if err != nil {
+				// Check if the error is due to listener being closed
+				if strings.Contains(err.Error(), "use of closed network connection") {
+					slog.Info("Listener closed, stopping connection acceptance")
+					return
+				}
 				slog.Error("Failed to accept connection", "error", err)
 				continue
 			}
