@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package marbl;
+
+option go_package = "/proto/gen;marblapi";
+
+service TaskService {
+  rpc ProcessTask(TaskRequest) returns (TaskResponse) {}
+}
+
+message TaskRequest {
+  int64 id = 1;
+  int32 type = 2;
+  int32 value = 3;
+}
+
+message TaskResponse {
+  bool success = 1;
+}

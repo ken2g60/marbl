@@ -1,0 +1,86 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: tasks
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U user -d tasks"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  consumer:
+    build:
+      context: .
+      dockerfile: Dockerfile.consumer
+    environment:
+      - MODE=consumer
+      - GRPC_PORT=50051
+      - PROMETHEUS_PORT=9091
+      - DB_CONN=postgres://user:password@db:5432/tasks?sslmode=disable
+      - LOG_LEVEL=debug
+      - LOG_FORMAT=json
+      - PROFILING_PORT=6061
+      - MESSAGE_RATE=5
+      - ZEROMQ_PORT=5555
+      - ZEROMQ_ADDR=producer:5555
+      # Note: For GOGC and GOMEMLIMIT, we can control them here. 
+      # E.g. setting soft memory limit
+      - GOMEMLIMIT=256MiB
+    ports:
+      - "50051:50051"
+      - "9091:9091"
+      - "6061:6061"
+    depends_on:
+      db:
+        condition: service_healthy
+
+  producer:
+    build:
+      context: .
+      dockerfile: Dockerfile.producer
+    environment:
+      - MODE=producer
+      - GRPC_ADDR=consumer:50051
+      - PROMETHEUS_PORT=9092
+      - DB_CONN=postgres://user:password@db:5432/tasks?sslmode=disable
+      - MAX_BACKLOG=100
+      - LOG_LEVEL=debug
+      - LOG_FORMAT=json
+      - PROFILING_PORT=6062
+      - MESSAGE_RATE=10
+      - ZEROMQ_PORT=5555
+      - ZEROMQ_ADDR=localhost:5555
+      - GOMEMLIMIT=128MiB
+    ports:
+      - "9092:9092"
+      - "6062:6062"
+      - "5555:5555"
+    depends_on:
+      consumer:
+        condition: service_started
+      db:
+        condition: service_healthy
+
+  prometheus:
+    image: prom/prometheus
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+    ports:
+      - "9090:9090"
+
+  grafana:
+    image: grafana/grafana
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+    depends_on:
+      - prometheus
