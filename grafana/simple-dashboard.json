@@ -1,0 +1,175 @@
+{
+  "id": null,
+  "title": "Simple Task Dashboard",
+  "tags": ["tasks"],
+  "timezone": "browser",
+  "panels": [
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "cfl5a6pa116gwa"
+      },
+      "id": 1,
+      "title": "Tasks Done",
+      "type": "stat",
+      "targets": [
+        {
+          "expr": "tasks_done_total",
+          "refId": "A"
+        }
+      ],
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 0
+      },
+      "options": {
+        "reduceOptions": {
+          "values": false,
+          "calcs": ["lastNotNull"],
+          "fields": ""
+        }
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "thresholds": {
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "cfl5a6pa116gwa"
+      },
+      "id": 2,
+      "title": "Tasks Produced",
+      "type": "stat",
+      "targets": [
+        {
+          "expr": "tasks_produced_total",
+          "refId": "B"
+        }
+      ],
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 0
+      },
+      "options": {
+        "reduceOptions": {
+          "values": false,
+          "calcs": ["lastNotNull"],
+          "fields": ""
+        }
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "thresholds": {
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "datasource": {
+        "type": "postgres",
+        "uid": "afl5a7v2uv1mof"
+      },
+      "id": 3,
+      "title": "Total Tasks in Database",
+      "type": "stat",
+      "targets": [
+        {
+          "refId": "C",
+          "format": "table",
+          "rawQuery": true,
+          "rawSql": "SELECT COUNT(*) as task_count FROM tasks;"
+        }
+      ],
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 8
+      },
+      "options": {
+        "reduceOptions": {
+          "values": false,
+          "calcs": ["lastNotNull"],
+          "fields": ""
+        }
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "thresholds": {
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "datasource": {
+        "type": "postgres",
+        "uid": "afl5a7v2uv1mof"
+      },
+      "id": 4,
+      "title": "Tasks by State",
+      "type": "table",
+      "targets": [
+        {
+          "refId": "D",
+          "format": "table",
+          "rawQuery": true,
+          "rawSql": "SELECT state, COUNT(*) as count FROM tasks GROUP BY state ORDER BY count DESC;"
+        }
+      ],
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 8
+      },
+      "options": {
+        "showHeader": true
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          }
+        }
+      }
+    }
+  ],
+  "schemaVersion": 36,
+  "version": 1,
+  "refresh": "5s"
+}

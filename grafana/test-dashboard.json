@@ -1,67 +1,63 @@
 {
-  "dashboard": {
-    "id": null,
-    "title": "Test Dashboard",
-    "tags": ["test"],
-    "timezone": "browser",
-    "panels": [
-      {
-        "id": 1,
-        "title": "Tasks Done Total",
-        "type": "stat",
-        "targets": [
-          {
-            "expr": "tasks_done_total",
-            "refId": "A",
-            "datasource": {
-              "type": "prometheus",
-              "uid": "efl1971nqwjcwa"
-            }
-          }
-        ],
-        "gridPos": {
-          "h": 8,
-          "w": 12,
-          "x": 0,
-          "y": 0
-        },
-        "options": {
-          "reduceOptions": {
-            "values": false,
-            "calcs": [
-              "lastNotNull"
-            ],
-            "fields": ""
-          }
-        },
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "palette-classic"
-            },
-            "custom": {
-              "displayMode": "list",
-              "orientation": "horizontal"
-            },
-            "mappings": [],
-            "thresholds": {
-              "steps": [
-                {
-                  "color": "green",
-                  "value": null
-                },
-                {
-                  "color": "red",
-                  "value": 80
-                }
-              ]
-            }
+  "id": null,
+  "title": "Test Dashboard",
+  "tags": ["test"],
+  "timezone": "browser",
+  "panels": [
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "cfl5a6pa116gwa"
+      },
+      "id": 1,
+      "title": "Tasks Done Total",
+      "type": "stat",
+      "targets": [
+        {
+          "expr": "tasks_done_total",
+          "refId": "A"
+        }
+      ],
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 0
+      },
+      "options": {
+        "reduceOptions": {
+          "values": false,
+          "calcs": ["lastNotNull"],
+          "fields": ""
+        }
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "displayMode": "list",
+            "orientation": "horizontal"
+          },
+          "mappings": [],
+          "thresholds": {
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
           }
         }
       }
-    ],
-    "schemaVersion": 36,
-    "version": 1,
-    "refresh": "5s"
-  }
+    }
+  ],
+  "schemaVersion": 36,
+  "version": 1,
+  "refresh": "5s"
 }

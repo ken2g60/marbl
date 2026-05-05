@@ -23,7 +23,10 @@
       "bars": true,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "Prometheus-Local",
+      "datasource": {
+          "type": "prometheus",
+          "uid": "cfl5a6pa116gwa"
+        },
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
@@ -120,7 +123,10 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "Prometheus-Local",
+      "datasource": {
+          "type": "prometheus",
+          "uid": "cfl5a6pa116gwa"
+        },
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
@@ -221,7 +227,10 @@
       "bars": true,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "Prometheus-Local",
+      "datasource": {
+          "type": "prometheus",
+          "uid": "cfl5a6pa116gwa"
+        },
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
@@ -308,7 +317,10 @@
       "bars": true,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "Prometheus-Local",
+      "datasource": {
+          "type": "prometheus",
+          "uid": "cfl5a6pa116gwa"
+        },
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
@@ -391,7 +403,10 @@
       }
     },
     {
-      "datasource": "Prometheus-Local",
+      "datasource": {
+          "type": "prometheus",
+          "uid": "cfl5a6pa116gwa"
+        },
       "gridPos": {
         "h": 8,
         "w": 12,
@@ -412,7 +427,10 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "Prometheus-Local",
+      "datasource": {
+          "type": "prometheus",
+          "uid": "cfl5a6pa116gwa"
+        },
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
@@ -504,7 +522,10 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "Prometheus-Local",
+      "datasource": {
+          "type": "prometheus",
+          "uid": "cfl5a6pa116gwa"
+        },
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
@@ -597,7 +618,10 @@
       }
     },
     {
-      "datasource": "Prometheus-Local",
+      "datasource": {
+          "type": "prometheus",
+          "uid": "cfl5a6pa116gwa"
+        },
       "gridPos": {
         "h": 8,
         "w": 12,
@@ -618,7 +642,10 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "Prometheus-Local",
+      "datasource": {
+          "type": "prometheus",
+          "uid": "cfl5a6pa116gwa"
+        },
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
